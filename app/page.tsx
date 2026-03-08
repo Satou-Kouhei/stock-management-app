@@ -1,7 +1,7 @@
 function toppage () {
     return (
         <>
-            <header className='flex justify-around container mx-auto'>
+            <header className='flex justify-around container mx-auto sticky top-0'>
                 <h1>ストック管理アプリ</h1>
                 <nav>
                     <ul className='flex gap-4'>
@@ -11,7 +11,7 @@ function toppage () {
                 </nav>
             </header>
             <main className='min-h-screen'></main>
-            <footer className='text-center'>&copy; 2026 さとうこうへい</footer>
+            <footer className='text-center sticky bottom-0'>&copy; 2026 さとうこうへい</footer>
         </>
     )
 }
