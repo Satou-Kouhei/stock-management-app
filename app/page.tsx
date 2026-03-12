@@ -5,13 +5,16 @@ function toppage () {
                 <h1>ストック管理アプリ</h1>
                 <nav>
                     <ul className='flex gap-4'>
-                        <li>ダッシュボード</li>
-                        <li>一覧</li>
+                      <li><a href="/">トップ</a></li>
+                      <li><a href="/dashboad">ダッシュボード</a></li>
+                      <li><a href="/stocks">一覧</a></li>
                     </ul>
                 </nav>
             </header>
-            <main className='min-h-screen'></main>
-            <footer className='text-center sticky bottom-0'>&copy; 2026 さとうこうへい</footer>
+            <main className='min-h-screen'>
+                
+            </main>
+            <footer className='text-center container mx-auto sticky bottom-0'>&copy; 2026 さとうこうへい</footer>
         </>
     )
 }
