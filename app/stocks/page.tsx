@@ -1,13 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button';
-import { Card,
-  CardHeader,
-  CardFooter,
-  CardTitle,
-  CardAction,
-  CardDescription,
-  CardContent } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { useEffect, useState } from 'react';
 
@@ -19,7 +13,7 @@ type Storages = {
     }
 }
 
-export default function Home() {
+export default function stocks() {
   const [items,setItems] = useState<Storages[]>([]);
   const [item, setItem] = useState<string>("");
   const [value, setValue] = useState<number>(0);
