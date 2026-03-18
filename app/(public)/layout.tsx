@@ -31,8 +31,8 @@ export default function RootLayout({
           <h1>ストック管理アプリ</h1>
           <nav>
               <ul className='flex flex-row gap-6'>
-                <li><a href="">ログイン</a></li>
-                <li><a href="">登録</a></li>
+                <li><a href="/login">ログイン</a></li>
+                <li><a href="/register">登録</a></li>
               </ul>
           </nav>
         </header>
