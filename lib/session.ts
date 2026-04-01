@@ -37,3 +37,16 @@ export async function createSession(expiresAt: Date, jwt: string) {
         path: "/"
     })
 }
+
+export async function getUserIdBySession() {
+    // クッキーからJWTを取得
+    const cookieStore = await cookies();
+    const session = cookieStore.get("session");
+    if(!session) return "";
+
+    const jwt = session.value;
+    const token = await decrypt(jwt);
+    if(!token) return "";
+
+    return token.userId as string;
+}

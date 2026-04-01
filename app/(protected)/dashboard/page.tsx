@@ -1,6 +1,12 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { getItems } from '@/lib/db';
+import { getUserIdBySession } from '@/lib/session';
 
-export default function dashboad() {
+export default async function dashboad() {
+    const userId = await getUserIdBySession();
+    if(!userId) return;
+
+    const listItems = await getItems(userId);
     return (
         <>
             <section id='dashboad'>
@@ -73,9 +79,19 @@ export default function dashboad() {
                         </CardHeader>
                         <CardContent>
                             <ul>
-                                <li><Card>登録１</Card></li>
-                                <li><Card>登録２</Card></li>
-                                <li><Card>登録３</Card></li>
+                                {listItems?.map((item) => {
+                                    return (
+                                        <li  key={item.id}>
+                                            <Card>
+                                                <ul className='grid grid-cols-3 justify-between px-5'>
+                                                    <li>{item.name}</li>
+                                                    <li>{item.quantity}</li>
+                                                    <li>{!item.expiresAt ? "" : item.expiresAt.toDateString()}</li>
+                                                </ul>
+                                            </Card>
+                                        </li>
+                                    )
+                                })}
                             </ul>
                         </CardContent>
                     </Card>
