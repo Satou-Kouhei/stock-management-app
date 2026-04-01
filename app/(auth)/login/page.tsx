@@ -2,15 +2,10 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Field, FieldDescription, FieldGroup, FieldLabel, FieldLegend, FieldSet } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
+import { loginAction } from '../actions';
 
 export default function login() {
-    async function loginAction(formData: FormData) {
-        'use server'
 
-        const username = formData.get("username");
-        const userpass = formData.get("userpass");
-
-    }
     return (
         <>
             <section className='flex-1 flex justify-center items-center py-12'>
