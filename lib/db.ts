@@ -20,3 +20,12 @@ export async function getItems(userId: string): Promise<Item[] | null> {
         }
     });
 }
+
+export async function createUser(username: string, userpass: string) {
+    return await prisma.user.create({
+        data: {
+            name: username,
+            password: userpass
+        }
+    });
+}

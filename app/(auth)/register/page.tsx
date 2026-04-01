@@ -2,15 +2,11 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Field, FieldDescription, FieldGroup, FieldLabel, FieldLegend, FieldSet } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
+import { registerAction } from '../actions';
 
 
 export default function register() {
-    async function registerAction(formData: FormData) {
-        'use server'
-
-        const username = formData.get("username");
-        const userpass = formData.get("userpass");
-    }
+    
     return (
         <>
             <section className='flex justify-center items-center py-12'>
@@ -28,6 +24,10 @@ export default function register() {
                             <Field>
                                 <FieldLabel htmlFor='userpass'>パスワード</FieldLabel>
                                 <Input id='userpass' name='userpass' type='password' autoComplete='off' placeholder='パスワードを入力' />
+                            </Field>
+                            <Field>
+                                <FieldLabel htmlFor='userpass'>パスワード・確認</FieldLabel>
+                                <Input id='userpass-confirm' name='userpass-confirm' type='password' autoComplete='off' placeholder='パスワードを入力' />
                             </Field>
                             <Button className='container mx-auto' type='submit'>登録</Button>
                         </FieldGroup>
