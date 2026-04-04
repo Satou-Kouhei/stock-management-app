@@ -29,3 +29,14 @@ export async function createUser(username: string, userpass: string) {
         }
     });
 }
+
+export async function putItem(userId: string, itemName: string, quantity: number, expiresAt?: Date) {
+    return prisma.item.create({
+        data: {
+            userId: userId,
+            name: itemName,
+            quantity: quantity,
+            expiresAt: expiresAt,
+        },
+    })
+}

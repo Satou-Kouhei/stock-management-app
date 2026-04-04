@@ -78,8 +78,15 @@ export default async function dashboad() {
                             <CardDescription>登録状況の一覧</CardDescription>
                         </CardHeader>
                         <CardContent>
+                            <Card>
+                                <ul className='grid grid-cols-3 justify-between px-5'>
+                                    <li>品名</li>
+                                    <li>数量</li>
+                                    <li>使用期限/消費期限</li>
+                                </ul>
+                            </Card>
                             <ul>
-                                {listItems?.map((item) => {
+                                {listItems?.length !== 0 ? listItems?.map((item) => {
                                     return (
                                         <li  key={item.id}>
                                             <Card>
@@ -91,7 +98,7 @@ export default async function dashboad() {
                                             </Card>
                                         </li>
                                     )
-                                })}
+                                }): "何も登録されていません。\n 何か登録してみましょう！" }
                             </ul>
                         </CardContent>
                     </Card>
