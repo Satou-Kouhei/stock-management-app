@@ -14,8 +14,8 @@ export default async function stocks() {
 
   return (
     <>
-      <section id='add'>
-        <Card>
+      <section id='add' className='container mx-auto mt-3'>
+        <Card className='px-5'>
           <CardHeader>
             <CardTitle>新しい品目を追加</CardTitle>
           </CardHeader>
@@ -32,7 +32,8 @@ export default async function stocks() {
           </form>
         </Card>
       </section>
-      <section id='list'>
+
+      <section id='list' className='container mx-auto mt-3'>
         <Card>
           <CardHeader>
             <CardTitle>
@@ -44,13 +45,13 @@ export default async function stocks() {
             {items?.length > 0 ? items.map((item) => 
                 <Card key={item.id} className='px-5'>
                   <dl role='list' className='grid grid-cols-2'>
-                    <dt>品目</dt>
+                    <dt role='listitem'>品目</dt>
                     <dd>{item.name}</dd>
-                    <dt>個数</dt>
+                    <dt role='listitem'>個数</dt>
                     <dd>{item.quantity}</dd>
-                    <dt>使用期限/消費期限</dt>
+                    <dt role='listitem'>使用期限/消費期限</dt>
                     <dd>{!item.expiresAt ? "" : new Date(item.expiresAt).toLocaleDateString("ja-jp")}</dd>
-                    <dt>削除フラグ</dt>
+                    <dt role='listitem'>削除フラグ</dt>
                     <dd>{item.deleteFlg ? "削除" : "有効"}</dd>
                   </dl>
                 </Card>
