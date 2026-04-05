@@ -5,6 +5,7 @@ import { getItems } from '@/lib/db';
 import { getUserIdBySession } from '@/lib/session';
 import { Item } from '@/lib/types';
 import { addItemAction } from '../action';
+import { Label } from '@/components/ui/label';
 
 export default async function stocks() {
   const userId = await getUserIdBySession();
@@ -15,14 +16,17 @@ export default async function stocks() {
     <>
       <section id='add'>
         <Card>
+          <CardHeader>
+            <CardTitle>新しい品目を追加</CardTitle>
+          </CardHeader>
           <form action={addItemAction}>
-            <p>品目を入力</p>
-            <Input name='item-name' type="text"/>
-            <p>数量を入力</p>
-            <Input name='item-quantity' type="number"/>
-            <p>使用期限/消費期限を入力</p>
-            <Input name='item-expires' type="date" />
-            <Button type='submit' size="default" variant="outline">
+            <Label htmlFor='item-name'  className='mt-2'>品目を入力</Label>
+            <Input id='item-name' name='item-name' type="text" className='mt-2' />
+            <Label htmlFor='item-quantity' className='mt-2'>数量を入力</Label>
+            <Input id='item-quantity' name='item-quantity' type="number" className='mt-2' />
+            <Label htmlFor='item-expires' className='mt-2'>使用期限/消費期限を入力</Label>
+            <Input id='item-expires' name='item-expires' type="date" className='mt-2' />
+            <Button type='submit' size="default" variant="outline" className='mt-2'>
               追加
             </Button>
           </form>
@@ -36,22 +40,24 @@ export default async function stocks() {
             </CardTitle>
           </CardHeader>
 
-          {items?.length !== 0 ? items.map((items) => 
-            <CardContent key={items.id}>
-                <Card>
-                  <dl className='grid grid-cols-2'>
+          <CardContent>
+            {items?.length > 0 ? items.map((item) => 
+                <Card key={item.id} className='px-5'>
+                  <dl role='list' className='grid grid-cols-2'>
                     <dt>品目</dt>
-                    <dd>{items.name}</dd>
+                    <dd>{item.name}</dd>
                     <dt>個数</dt>
-                    <dd>{items.quantity}</dd>
+                    <dd>{item.quantity}</dd>
                     <dt>使用期限/消費期限</dt>
-                    <dd>{!items.expiresAt ? "" : items.expiresAt.toDateString()}</dd>
+                    <dd>{!item.expiresAt ? "" : new Date(item.expiresAt).toLocaleDateString("ja-jp")}</dd>
                     <dt>削除フラグ</dt>
-                    <dd>{items.deleteFlg}</dd>
+                    <dd>{item.deleteFlg ? "削除" : "有効"}</dd>
                   </dl>
                 </Card>
-            </CardContent>
-          ) : "何も登録されていません。"}
+            ) :
+              <p>何も登録されていません。</p>
+            }
+          </CardContent>
         </Card>
       </section>
     </>

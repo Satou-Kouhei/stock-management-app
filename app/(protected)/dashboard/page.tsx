@@ -7,6 +7,7 @@ export default async function dashboad() {
     if(!userId) return;
 
     const listItems = await getItems(userId);
+    if(!listItems) return;
     return (
         <>
             <section id='dashboad'>
@@ -86,19 +87,27 @@ export default async function dashboad() {
                                 </ul>
                             </Card>
                             <ul>
-                                {listItems?.length !== 0 ? listItems?.map((item) => {
+                                {listItems?.length > 0 ? listItems.map((item) => {
                                     return (
                                         <li  key={item.id}>
                                             <Card>
-                                                <ul className='grid grid-cols-3 justify-between px-5'>
-                                                    <li>{item.name}</li>
-                                                    <li>{item.quantity}</li>
-                                                    <li>{!item.expiresAt ? "" : item.expiresAt.toDateString()}</li>
-                                                </ul>
+                                                <CardContent>
+                                                    <ul className='grid grid-cols-3 justify-between'>
+                                                        <li>{item.name}</li>
+                                                        <li>{item.quantity}</li>
+                                                        <li>{!item.expiresAt ? "" : new Date(item.expiresAt).toLocaleDateString("ja-jp")}</li>
+                                                    </ul>
+                                                </CardContent>
                                             </Card>
                                         </li>
                                     )
-                                }): "何も登録されていません。\n 何か登録してみましょう！" }
+                                }): 
+                                    <Card>
+                                        <CardContent  className='text-red-500'>
+                                            <p>何も登録されていません。何か登録してみましょう！</p>
+                                        </CardContent>
+                                    </Card>
+                                }
                             </ul>
                         </CardContent>
                     </Card>
