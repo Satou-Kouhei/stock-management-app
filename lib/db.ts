@@ -92,3 +92,21 @@ export async function putItem(userId: string, itemName: string, quantity: number
         },
     })
 }
+
+/**
+ * 
+ * @param itemId 
+ * @param newFlg 
+ * @description
+ * アイテムIDと削除フラグを受け取って、論理削除の有効/無効を更新する
+ */
+export async function deleteItem(itemId: string, newFlg: boolean) {
+    return prisma.item.update({
+        where: {
+            id: itemId,
+        },
+        data: {
+            deleteFlg: newFlg,
+        }
+    });
+}
