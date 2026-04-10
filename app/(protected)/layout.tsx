@@ -33,14 +33,13 @@ export default function RootLayout({
               <ul className='flex flex-row gap-6'>
                 <li><a href="/">トップ</a></li>
                 <li><a href="/dashboard">ダッシュボード</a></li>
-                <li><a href="/stocks">一覧</a></li>
+                <li><a href="/list">リスト</a></li>
               </ul>
           </nav>
         </header>
         <main className='min-h-screen'>
           {children}  
         </main>
-        <footer className='text-center container mx-auto sticky bottom-0'>&copy; 2026 さとうこうへい</footer>
       </body>
     </html>
   );
