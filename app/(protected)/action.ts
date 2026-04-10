@@ -1,4 +1,4 @@
-import { putItem } from '@/lib/db';
+import { putItem, deleteItem } from '@/lib/db';
 import { getUserIdBySession } from '@/lib/session';
 import { redirect } from 'next/navigation';
 
@@ -21,5 +21,28 @@ export async function addItemAction(formData: FormData) {
 
     await putItem(userId, itemName, itemQuantity, expiresAt)
 
-    redirect("/stocks");
+    redirect("/list");
+}
+
+export async function deleteItemAction(formData: FormData) {
+    "use server"
+
+    try{
+        const dispState = formData.get("disp") as string;
+        const itemId = formData.get("itemId") as string;
+
+        let isDisp = false;
+
+        if(dispState === "false") {
+            isDisp = true;
+        } else {
+            isDisp = false;
+        }
+
+        await deleteItem(itemId, isDisp)
+    } catch(e) {
+        console.log("エラー")
+    } finally {
+        redirect("/list");
+    }
 }
