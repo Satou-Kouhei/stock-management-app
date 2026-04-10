@@ -75,8 +75,8 @@ export default async function dashboad() {
                 <article className='list'>
                     <Card className='container content-around mx-auto'>
                         <CardHeader>
-                            <CardTitle>リスト</CardTitle>
-                            <CardDescription>登録状況の一覧</CardDescription>
+                            <CardTitle>一覧</CardTitle>
+                            <CardDescription>登録品目数：{listItems.length}</CardDescription>
                         </CardHeader>
                         <CardContent>
                             <Card>
