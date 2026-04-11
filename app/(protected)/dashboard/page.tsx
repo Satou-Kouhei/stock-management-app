@@ -1,6 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { getItems } from '@/lib/db';
 import { getUserIdBySession } from '@/lib/session';
+import ListDisplay from './component/listDisplay';
 
 export default async function dashboad() {
     const userId = await getUserIdBySession();
@@ -72,46 +73,8 @@ export default async function dashboad() {
                     </Card>
                 </article>
 
-                <article className='list'>
-                    <Card className='container content-around mx-auto'>
-                        <CardHeader>
-                            <CardTitle>一覧</CardTitle>
-                            <CardDescription>登録品目数：{listItems.length}</CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                            <Card>
-                                <ul className='grid grid-cols-3 justify-between px-5'>
-                                    <li>品名</li>
-                                    <li>数量</li>
-                                    <li>使用期限/消費期限</li>
-                                </ul>
-                            </Card>
-                            <ul>
-                                {listItems?.length > 0 ? listItems.map((item) => {
-                                    return (
-                                        <li  key={item.id}>
-                                            <Card>
-                                                <CardContent>
-                                                    <ul className='grid grid-cols-3 justify-between'>
-                                                        <li>{item.name}</li>
-                                                        <li>{item.quantity}</li>
-                                                        <li>{!item.expiresAt ? "" : new Date(item.expiresAt).toLocaleDateString("ja-jp")}</li>
-                                                    </ul>
-                                                </CardContent>
-                                            </Card>
-                                        </li>
-                                    )
-                                }): 
-                                    <Card>
-                                        <CardContent  className='text-red-500'>
-                                            <p>何も登録されていません。何か登録してみましょう！</p>
-                                        </CardContent>
-                                    </Card>
-                                }
-                            </ul>
-                        </CardContent>
-                    </Card>
-                </article>
+                <ListDisplay />
+               
             </section>
         </>
     )
