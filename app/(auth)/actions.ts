@@ -1,4 +1,4 @@
-import { createUser, getUserByName, userExists } from '@/lib/db';
+import { createUser, getUserByName, userExists } from '@/lib/db/db_user';
 import { createSession, encrypt } from '@/lib/session';
 import bcrypt from 'bcryptjs';
 import { redirect } from 'next/navigation';
