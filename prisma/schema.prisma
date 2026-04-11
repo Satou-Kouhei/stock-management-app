@@ -21,13 +21,24 @@ model User {
 }
 
 model Item {
-  id        String    @id @default(uuid())
-  userId    String
-  name      String
-  quantity  Int
-  createAt  DateTime  @default(now())
-  updateAt  DateTime?
-  expiresAt DateTime?
-  deleteFlg Boolean   @default(false)
-  user      User      @relation(fields: [userId], references: [id])
+  id         String    @id @default(uuid())
+  userId     String
+  name       String
+  quantity   Int
+  createAt   DateTime  @default(now())
+  updateAt   DateTime?
+  expiresAt  DateTime?
+  deleteFlg  Boolean   @default(false)
+  categoryId String
+  category   Category  @relation(fields: [categoryId], references: [id])
+  user       User      @relation(fields: [userId], references: [id])
+}
+
+model Category {
+  id               String @id @default(uuid())
+  primaryCategory  String
+  secondaryCategry String
+  items            Item[]
+
+  @@unique([primaryCategory, secondaryCategry])
 }
