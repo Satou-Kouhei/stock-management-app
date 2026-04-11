@@ -1,5 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { getItems } from '@/lib/db';
+import { getItems } from '@/lib/db/db_item';
 import { getUserIdBySession } from '@/lib/session';
 import ListDisplay from './component/listDisplay';
 

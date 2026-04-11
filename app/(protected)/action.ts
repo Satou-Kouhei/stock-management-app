@@ -1,4 +1,4 @@
-import { putItem, deleteItem } from '@/lib/db';
+import { putItem, deleteItem } from '@/lib/db/db_item';
 import { getUserIdBySession } from '@/lib/session';
 import { redirect } from 'next/navigation';
 

@@ -1,7 +1,7 @@
 import { Card, CardHeader, CardTitle, CardDescription ,CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { getUserIdBySession } from '@/lib/session';
-import { getItems } from '@/lib/db';
+import { getItems } from '@/lib/db/db_item';
 import { Item } from '@/lib/types';
 import { deleteItemAction } from '../../action';
 import { Checkbox } from '@/components/ui/checkbox';
