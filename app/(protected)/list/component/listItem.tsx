@@ -36,7 +36,7 @@ export default async function ListItems() {
                                             <dd>{item.quantity}</dd>
                                             <dt role='listitem'>使用期限/消費期限</dt>
                                             <dd>{!item.expiresAt ? "" : new Date(item.expiresAt).toLocaleDateString("ja-jp")}</dd>
-                                            <dt role='listitem'>表示/非表示切り替え</dt>
+                                            <dt role='listitem'>現在の表示/非表示</dt>
                                             <dd>
                                                 {item.deleteFlg ? "非表示" : "表示"}
                                                 <Checkbox name='disp' value={String(item.deleteFlg)} />
