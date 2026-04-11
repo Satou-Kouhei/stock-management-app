@@ -35,10 +35,10 @@ model Item {
 }
 
 model Category {
-  id               String @id @default(uuid())
-  primaryCategory  String
-  secondaryCategry String
-  items            Item[]
+  id                String @id @default(uuid())
+  primaryCategory   String
+  secondaryCategory String
+  items             Item[]
 
-  @@unique([primaryCategory, secondaryCategry])
+  @@unique([primaryCategory, secondaryCategory])
 }
