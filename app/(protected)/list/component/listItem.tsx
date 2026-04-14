@@ -5,6 +5,7 @@ import { getItems } from '@/lib/db/db_item';
 import { Item } from '@/lib/types';
 import { deleteItemAction } from '../../action';
 import { Checkbox } from '@/components/ui/checkbox';
+import { getCategoryById } from '@/lib/db/db_category';
 
 export default async function ListItems() {
     const userId: string = await getUserIdBySession();
@@ -25,30 +26,34 @@ export default async function ListItems() {
                     </CardHeader>
 
                     <CardContent>
-                        {items?.length > 0 ? items.map((item) => 
-                            <form key={item.id} action={deleteItemAction}>
-                                <Card className='px-5'>
-                                    <CardContent>
-                                        <dl role='list' className='grid grid-cols-2'>
-                                            <dt role='listitem'>品目</dt>
-                                            <dd>{item.name}</dd>
-                                            <dt role='listitem'>個数</dt>
-                                            <dd>{item.quantity}</dd>
-                                            <dt role='listitem'>使用期限/消費期限</dt>
-                                            <dd>{!item.expiresAt ? "" : new Date(item.expiresAt).toLocaleDateString("ja-jp")}</dd>
-                                            <dt role='listitem'>現在の表示/非表示</dt>
-                                            <dd>
-                                                {item.deleteFlg ? "非表示" : "表示"}
-                                                <Checkbox name='disp' value={String(item.deleteFlg)} />
-                                            </dd>
-                                        </dl>
-                                        <Button name='itemId' value={item.id}>変更</Button>
-                                    </CardContent>
-                                </Card>
-                            </form>
-                        ) :
-                            <p>何も登録されていません。</p>
-                        }
+                        {items?.length > 0 ? items.map(async(item) => {
+                            const category = await getCategoryById(item.categoryId);
+                            return (
+                                <form key={item.id} action={deleteItemAction}>
+                                    <Card className='px-5'>
+                                        <CardContent>
+                                            <dl role='list' className='grid grid-cols-2'>
+                                                <dt role='listitem'>品目</dt>
+                                                <dd>{item.name}</dd>
+                                                <dt role='listitem'>個数</dt>
+                                                <dd>{item.quantity}</dd>
+                                                <dt role='listitem'>分類</dt>
+                                                <dd>{category?.secondaryCategory}</dd>
+                                                <dt role='listitem'>使用期限/消費期限</dt>
+                                                <dd>{!item.expiresAt ? "" : new Date(item.expiresAt).toLocaleDateString("ja-jp")}</dd>
+                                                <dt role='listitem'>現在の表示/非表示</dt>
+                                                <dd>
+                                                    {item.deleteFlg ? "非表示" : "表示"}
+                                                    <Checkbox name='disp' value={String(item.deleteFlg)} />
+                                                </dd>
+                                            </dl>
+                                            <Button name='itemId' value={item.id}>変更</Button>
+                                        </CardContent>
+                                    </Card>
+                                </form>
+                            )}) :
+                                <p>何も登録されていません。</p>
+                            }
                     </CardContent>
                 </Card>
             </section>
