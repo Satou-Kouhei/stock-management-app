@@ -20,7 +20,6 @@ export async function SelectCategory() {
                                 secondaries.push(cat);
                             }
                         }
-                        console.log(secondaries)
                         return (
                             <SelectGroup key={primary}>
                                 <SelectLabel className='px-3 py-2 text-xs font-medium text-muted-foreground'>{primary}</SelectLabel>
@@ -32,9 +31,7 @@ export async function SelectCategory() {
                                 <SelectSeparator className='border border-gray-300'/>
                             </SelectGroup>
                         );
-                    }
-
-                    )}
+                    })}
                 </SelectContent>
             </Select>
         </>
