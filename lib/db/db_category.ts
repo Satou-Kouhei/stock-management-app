@@ -23,10 +23,10 @@ export async function getAllCategory(): Promise<Category[]> {
  * @param categoryId 
  * @returns seconcaryCategory
  * @description Item の categoryId からカテゴリー（小分類）を取得する。
- * @example const category = await getCategoryById();
+ * @example const category = await getCategoryById(categoryId)
  */
-export async function getCategoryById(categoryId: string): Promise<{secondaryCategory: string} | null> {
-    return await prisma.category.findFirst({
+export async function getCategoryById(categoryId: string): Promise<string> {
+    const category = await prisma.category.findFirst({
         where: {
             id: categoryId,
         },
@@ -34,4 +34,5 @@ export async function getCategoryById(categoryId: string): Promise<{secondaryCat
             secondaryCategory: true,
         }
     });
+    return !category ? "" : category.secondaryCategory;
 }
