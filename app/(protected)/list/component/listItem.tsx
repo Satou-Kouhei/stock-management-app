@@ -38,7 +38,7 @@ export default async function ListItems() {
                                                 <dt role='listitem'>個数</dt>
                                                 <dd>{item.quantity}</dd>
                                                 <dt role='listitem'>分類</dt>
-                                                <dd>{category?.secondaryCategory}</dd>
+                                                <dd>{category}</dd>
                                                 <dt role='listitem'>使用期限/消費期限</dt>
                                                 <dd>{!item.expiresAt ? "" : new Date(item.expiresAt).toLocaleDateString("ja-jp")}</dd>
                                                 <dt role='listitem'>現在の表示/非表示</dt>
