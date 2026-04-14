@@ -26,7 +26,7 @@ export async function loginAction(formData: FormData) {
 
     // JWTを作成して、Cookieに登録
     const userId: string = user.id;
-    const expiresAt: Date = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+    const expiresAt: Date = new Date(Date.now() + 30 * 60 * 1000);
 
     const jwt: string = await encrypt({ userId, expiresAt} );
     await createSession(expiresAt, jwt);
@@ -60,7 +60,7 @@ export async function registerAction(formData: FormData) {
 
     // JWTを作成して、Cookieに登録
     const userId: string = newUser.id;
-    const expiresAt: Date = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+    const expiresAt: Date = new Date(Date.now() + 30 * 60 * 1000);
 
     const jwt: string = await encrypt({ userId, expiresAt} );
     await createSession(expiresAt, jwt);
