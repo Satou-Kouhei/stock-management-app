@@ -50,3 +50,8 @@ export async function getUserIdBySession() {
 
     return token.userId as string;
 }
+
+export async function deleteSession() {
+    const cookieStore = await cookies();
+    cookieStore.delete("session");
+}

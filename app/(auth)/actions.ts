@@ -1,5 +1,5 @@
 import { createUser, getUserByName, userExists } from '@/lib/db/db_user';
-import { createSession, encrypt } from '@/lib/session';
+import { createSession, deleteSession, encrypt } from '@/lib/session';
 import bcrypt from 'bcryptjs';
 import { redirect } from 'next/navigation';
 
@@ -66,4 +66,11 @@ export async function registerAction(formData: FormData) {
     await createSession(expiresAt, jwt);
 
     redirect("/dashboard");
+}
+
+export async function logoutAction() {
+    "use server"
+
+    await deleteSession();
+    redirect("/");
 }

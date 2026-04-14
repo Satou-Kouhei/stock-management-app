@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
+import LogOutButton from './logOutButton';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,13 +28,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
 
-        <header className='flex justify-around container mx-auto sticky top-0'>
+        <header className='flex justify-around container mx-auto sticky top-0 z-10 bg-white'>
           <h1>ストック管理アプリ</h1>
           <nav>
               <ul className='flex flex-row gap-6'>
-                <li><a href="/">トップ</a></li>
                 <li><a href="/dashboard">ダッシュボード</a></li>
                 <li><a href="/list">リスト</a></li>
+                <LogOutButton />
               </ul>
           </nav>
         </header>
