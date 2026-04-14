@@ -3,11 +3,12 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { addItemAction } from '../../action';
+import { SelectCategory } from './selectCategory';
 
 function AddItem() {
     return (
         <>
-            <section id='add' className='container mx-auto mt-3'>
+            <section id='add' className='container mx-auto mt-3 overflow-visible'>
                 <Card className='px-5'>
                     <CardHeader>
                         <CardTitle>新しい品目を追加</CardTitle>
@@ -17,6 +18,8 @@ function AddItem() {
                         <Input id='item-name' name='item-name' type="text" className='mt-2' />
                         <Label htmlFor='item-quantity' className='mt-2'>数量を入力</Label>
                         <Input id='item-quantity' name='item-quantity' type="number" className='mt-2' />
+                        <Label htmlFor='item-category' className='mt-2'>分類を入力</Label>
+                        <SelectCategory />
                         <Label htmlFor='item-expires' className='mt-2'>使用期限/消費期限を入力</Label>
                         <Input id='item-expires' name='item-expires' type="date" className='mt-2' />
                         <Button type='submit' size="default" variant="outline" className='mt-2'>

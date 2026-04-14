@@ -8,9 +8,10 @@ export async function addItemAction(formData: FormData) {
     const itemName = formData.get("item-name")?.toString();
     const itemQuantity = Number(formData.get("item-quantity"));
     const itemExpires = formData.get("item-expires")?.toString()?.trim();
+    const itemCategory = formData.get("item-category")?.toString();
 
-    if(!itemName || isNaN(itemQuantity)) {
-        console.log("品目と数量は必須です。");
+    if(!itemName || isNaN(itemQuantity) || !itemCategory) {
+        console.log("品目と数量と分類は必須です。");
         return;
     }
 
@@ -19,7 +20,7 @@ export async function addItemAction(formData: FormData) {
     const userId = await getUserIdBySession();
     if(userId !== "") console.log(userId);
 
-    await putItem(userId, itemName, itemQuantity, expiresAt)
+    await putItem(userId, itemName, itemQuantity, itemCategory, expiresAt);
 
     redirect("/list");
 }
