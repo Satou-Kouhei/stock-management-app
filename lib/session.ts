@@ -14,14 +14,20 @@ export async function encrypt(payload: SessionPayload) {
         .sign(encodeKey);
 }
 
-export async function decrypt(session: string | undefined = "") {
+export async function decrypt(session: string | undefined) {
+    if(!session) return null;
     try {
         const { payload } = await jwtVerify(session, encodeKey, {
             algorithms: ["HS256"],
         });
         return payload;
-    } catch (error) {
-        console.log("セッションの検証に失敗しました。");
+    } catch (error: any) {
+        if(error.name === "JWTExpired") {
+            console.log("セッションの有効期限が切れています。");
+        } else {
+            console.log("セッションの検証に失敗しました。");
+        }
+        return null;
     }
 }
 
@@ -54,4 +60,32 @@ export async function getUserIdBySession() {
 export async function deleteSession() {
     const cookieStore = await cookies();
     cookieStore.delete("session");
+}
+
+export async function updateSession() {
+    const cookieStore = await cookies();
+    const session = cookieStore.get("session")?.value;
+
+    if(!session) return;
+
+    const payload = await decrypt(session);
+
+    if(!payload) return;
+
+    const expiresAt = new Date(Date.now() + 30 * 60 * 1000);
+
+    cookieStore.set("session", session, {
+        httpOnly: true,
+        secure: true,
+        expires: expiresAt,
+        sameSite: "strict",
+        path: "/"
+    })
+}
+
+export async function getSession() {
+    const cookieStore = await cookies();
+    const session = cookieStore.get("session")?.value
+
+    return session;
 }
